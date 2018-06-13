@@ -51,8 +51,12 @@ public class LevelManager : MonoBehaviour {
 
 
 	public void LoadLevel(string name) {
-		Brick.brickCount = 0;				
-		SceneManager.LoadScene(name);
+		if (name == "Lose") {
+			SceneManager.LoadScene("Lose");
+		} else {
+			Brick.brickCount = 0;				
+			SceneManager.LoadScene(name);
+		}
 	}
 
 	public void QuitLevel(string name) {
