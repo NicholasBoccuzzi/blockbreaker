@@ -45,6 +45,8 @@ public class LevelManager : MonoBehaviour {
 
 	void checkInput () {
 		if (Input.anyKeyDown) {
+			timer = 600;
+			auto = false;
 			LoadLevel("Start");
 		}
 	}
