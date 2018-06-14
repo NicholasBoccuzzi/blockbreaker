@@ -7,14 +7,16 @@ public class LevelManager : MonoBehaviour {
 	public string lev;
 	public Brick brick;
 	private PaddleMovement paddleMovement = null;
-	private int timer;
+	public int timer = 600;
 	private bool auto = false;
 
 	void Start () {
-		timer = 600;
+		
 	}
 
 	void Update () {
+		BrickDestroyed();
+		
 		if (lev == "Level_Auto") {
 			if (auto == true) {
 				if (paddleMovement == null) {
@@ -22,7 +24,6 @@ public class LevelManager : MonoBehaviour {
 					paddleMovement.autoPlay = true;
 				}
 			}
-
 			checkInput();
 		} else if (lev == "Level_01" || lev == "Level_02") {
 			Cursor.visible = false;
@@ -40,24 +41,23 @@ public class LevelManager : MonoBehaviour {
 			}
 		}
 
-		BrickDestroyed();
 	}
 
 	void checkInput () {
 		if (Input.anyKeyDown) {
-			timer = 600;
+			Debug.Log(timer);
 			auto = false;
 			LoadLevel("Start");
 		}
 	}
 
 
-	public void LoadLevel(string name) {
-		if (name == "Lose") {
+	public void LoadLevel(string sceneName) {
+		if (sceneName == "Lose") {
 			SceneManager.LoadScene("Lose");
 		} else {
 			Brick.brickCount = 0;				
-			SceneManager.LoadScene(name);
+			SceneManager.LoadScene(sceneName);
 		}
 	}
 
